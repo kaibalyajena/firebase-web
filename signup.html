@@ -24,21 +24,21 @@
                     <h2>Signup Form</h2>
                     <form>
                         <div class="inputbox">
-                            <input type="text" placeholder="Username">
+                            <input type="text" placeholder="Username" id="uname">
                         </div>
                         <div class="inputbox">
-                            <input type="text" placeholder="email">
+                            <input type="text" placeholder="email" id="email">
                         </div>
                         <div class="inputbox">
-                            <input type="password" placeholder="Password">
+                            <input type="password" placeholder="Password" id="pass">
                             
                         </div>
-                        <div class="inputbox">
-                            <input type="password" placeholder="Confirm Password">
+                        <!-- <div class="inputbox">
+                            <input type="password" placeholder="Confirm Password" id="cpass">
                             
-                        </div>
+                        </div> -->
                         <div class="inputbox">
-                            <a href="conditions.html">signup</a> 
+                            <a href="conditions.html" id="submitData">signup</a> 
                         </div>
                     </form>
                 </div>
@@ -47,27 +47,51 @@
 
     </section>
 </body>
+
+
+
+
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-auth.js";
+
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCBTojBM6PNYpcC0vnSrYAMJU7oUfGiZLA",
-      authDomain: "litasfire-b2bdf.firebaseapp.com",
-      databaseURL: "https://litasfire-b2bdf-default-rtdb.firebaseio.com",
-      projectId: "litasfire-b2bdf",
-      storageBucket: "litasfire-b2bdf.appspot.com",
-      messagingSenderId: "701420746430",
-      appId: "1:701420746430:web:64f0ed3244a4a4dc5c10ef"
+      apiKey: "AIzaSyDy55mZBfr8D9iIwU2YHuIfmB9ChuCTwYE",
+      authDomain: "signup1-web.firebaseapp.com",
+      projectId: "signup1-web",
+      storageBucket: "signup1-web.appspot.com",
+      messagingSenderId: "1051100405958",
+      appId: "1:1051100405958:web:9b362073d824ecf383b7c7"
     };
   
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
+    const auth = getAuth();
+
+    submitData.addEventListner('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('pass').value;
+
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                    alert('user created successfully');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                alert(errorMessage);
+            });
+    })
+
   </script>
-</html>
